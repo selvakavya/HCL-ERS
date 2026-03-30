@@ -1,25 +1,40 @@
 #include <iostream>
 using namespace std;
 
-int add(int a,int b){ return a+b; }
-int sub(int a,int b){ return a-b; }
-int mul(int a,int b){ return a*b; }
-int divi(int a,int b){ return a/b; }
+// Functions
+int add(int a, int b) { return a + b; }
+int sub(int a, int b) { return a - b; }
+int mul(int a, int b) { return a * b; }
+int divi(int a, int b) { return a / b; }
 
-int main()
-{
-    int (*calc[4])(int,int) = {add,sub,mul,divi};
+int main() {
+    int choice, a, b;
 
-    int choice,a,b;
+    // Function pointer
+    int (*func)(int, int);
 
-    cout<<"1.Add\n2.Sub\n3.Mul\n4.Div\n";
-    cout<<"Enter choice: ";
-    cin>>choice;
+    do {
+        cout << "\n1.Add 2.Sub 3.Mul 4.Div 5.Exit\n";
+        cin >> choice;
 
-    cout<<"Enter two numbers: ";
-    cin>>a>>b;
+        if (choice == 5) break;
 
-    cout<<"Result = "<< calc[choice-1](a,b);
+        cout << "Enter two numbers: ";
+        cin >> a >> b;
+
+        switch (choice) {
+            case 1: func = add; break;
+            case 2: func = sub; break;
+            case 3: func = mul; break;
+            case 4: func = divi; break;
+            default:
+                cout << "Invalid choice\n";
+                continue;
+        }
+
+        cout << "Result: " << func(a, b) << endl;
+
+    } while (true);
 
     return 0;
 }

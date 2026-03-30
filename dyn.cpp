@@ -1,61 +1,36 @@
 #include <iostream>
 using namespace std;
 
-class DynamicArray
-{
-    int *data;
-    int size;
-    int capacity;
-
+class Student {
 public:
+    int id;
+    string name;
 
-    DynamicArray()
-    {
-        capacity = 2;
-        size = 0;
-        data = new int[capacity];
+    void input() {
+        cout << "Enter ID and Name: ";
+        cin >> id >> name;
     }
 
-    void push(int value)
-    {
-        if(size == capacity)
-        {
-            capacity *= 2;
-
-            int *newData = new int[capacity];
-
-            for(int i=0;i<size;i++)
-                newData[i] = data[i];
-
-            delete[] data;
-            data = newData;
-        }
-
-        data[size++] = value;
-    }
-
-    void pop()
-    {
-        if(size > 0)
-            size--;
-    }
-
-    void display()
-    {
-        for(int i=0;i<size;i++)
-            cout<<data[i]<<" ";
+    void display() {
+        cout << "ID: " << id << ", Name: " << name << endl;
     }
 };
 
-int main()
-{
-    DynamicArray arr;
+int main() {
+    int n;
+    cout << "Enter number of students: ";
+    cin >> n;
 
-    arr.push(10);
-    arr.push(20);
-    arr.push(30);
+    Student *s = new Student[n]; // dynamic array
 
-    arr.pop();
+    for (int i = 0; i < n; i++)
+        s[i].input();
 
-    arr.display();
+    cout << "\nStudent Details:\n";
+    for (int i = 0; i < n; i++)
+        s[i].display();
+
+    delete[] s; // free memory
+
+    return 0;
 }
